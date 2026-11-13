@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.DS_Store
+.env
+# сырые данные и полные тексты не кладём в репозиторий (размер + лицензии arXiv);
+# воспроизводятся scripts/collect.py
+data/raw/
+data/eval/
+data/processed/chunks.jsonl
+data/*.log
+.claude/

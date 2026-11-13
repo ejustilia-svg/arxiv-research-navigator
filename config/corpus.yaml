@@ -1,0 +1,32 @@
+# Конфигурация корпуса для разработки и оценки (чекпоинт 1).
+# В продукте тема/период/категории задаются пользователем в интерфейсе;
+# здесь — фиксированный dev-корпус, на котором считаем метрики.
+
+topic: "Retrieval-Augmented Generation & LLM agents"
+
+period:
+  from: "2025-11-01"
+  to: "2026-10-31"
+
+categories: [cs.CL, cs.AI, cs.IR, cs.LG]
+
+# Поисковые запросы к arXiv API (по abstract/title). Результаты объединяются и дедуплицируются.
+queries:
+  - 'abs:"retrieval-augmented generation"'
+  - 'abs:"retrieval augmented generation"'
+  - 'ti:RAG'
+  - 'abs:"GraphRAG" OR abs:"graph-based retrieval"'
+  - 'abs:"agentic retrieval" OR abs:"agentic RAG"'
+  - 'abs:"LLM agent" AND abs:"tool use"'
+  - 'abs:"long-context" AND abs:"retrieval"'
+  - 'abs:"hallucination" AND abs:"retrieval"'
+  - 'abs:"citation" AND abs:"attribution" AND abs:"language model"'
+
+max_per_query: 3000  # с запасом: на 11.2025–10.2026 самый широкий запрос даёт ~2 250
+
+# Подмножество статей, для которых сразу скачиваем полный текст (HTML -> чанки с якорями).
+fulltext:
+  n_papers: 300  # на диске 440: ещё 140 докачаны после пересборки корпуса (лимит запросов 1000 -> 3000), старые не удаляем
+  # отбор: топ по цитируемости (Semantic Scholar) + случайная добивка для разнообразия
+  top_by_citations: 200
+  random_seed: 42
